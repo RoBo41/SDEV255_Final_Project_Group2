@@ -1,10 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap');
+:root {
+  --ivy-green: #006F53;
+  --ivy-lightGrey: #F5F5F5;
+  --ivy-darkGrey: #D8D8D8;
+}
         body{
           max-width: 1200px;
-          margin: 20px auto;
+          margin: 0px auto;
           padding: 0 20px;
           font-family: 'Noto Serif', serif;
           max-width: 1200px;
+          background-color: #FFF;
         }
         p, h1, h2, h3, a, ul{
           margin: 0;
@@ -14,42 +20,55 @@
         }
         /* nav & footer styles */
         nav{
+          width: 100%;
+          left: 0;
+          position: fixed;
+          top: 0;
           display: flex;
           justify-content: space-between;
           margin-bottom: 60px;
           padding-bottom: 10px;
-          border-bottom: 1px solid #ddd;
+          border-bottom: 1px solid #000;
           text-transform: uppercase;
+          background-color: var(--ivy-green);
+        }
+        .site-title{
+          margin-left:15px;
         }
         nav ul{
           display: flex;
           justify-content: space-between;
           align-items: flex-end;
+          margin-right: 15px;
         }
         nav li{
           list-style-type: none;
           margin-left: 20px;
         }
         nav h1{
+          color: white;
           font-size: 3em;
         }
         nav p, nav a{
-          color: #777;
+          color: white;
           font-weight: 300;
         }
         footer{
-          color: #777;
+          color: black;
           text-align: center;
-          margin: 80px auto 20px;
+          margin: 350px auto 20px;
+          background-color: var(--ivy-darkGrey);
         }
         h2{
           margin-bottom: 40px;
+          color: var(--ivy-green);
         }
         h3{
           text-transform: capitalize;
           margin-bottom: 8px;
         }
         .content{
+          margin-top: 175px;
           margin-left: 20px;
         }
         /* index styles */
@@ -57,7 +76,7 @@
         /* create styles */
         .create-blog form{
           max-width: 400px;
-          margin: 0 auto;
+          /*margin: 0 auto;*/
         }
         .create-blog input,
         .create-blog textarea{
@@ -75,7 +94,7 @@
         }
         .create-blog button{
           margin-top: 20px;
-          background: crimson;
+          background: var(--ivy-green);
           color: white;
           padding: 6px;
           border: 0;
