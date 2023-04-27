@@ -46,13 +46,16 @@
           list-style-type: none;
           margin-left: 20px;
         }
+        nav li a:hover {
+          color: black;
+        }
         nav h1{
           color: white;
           font-size: 3em;
         }
         nav p, nav a{
           color: white;
-          font-weight: 300;
+          font-weight: 300;         
         }
         footer{
           color: black;
@@ -81,6 +84,7 @@
       margin: 40px 0;
       padding-left: 30px;
       border-left: 6px solid var(--ivy-lightGreen);
+      
     }
     .courses a:hover h3{
       color: var(--ivy-lightGreen);
@@ -88,18 +92,21 @@
 
     /* details styles */
     .details{
-      position: relative;
+      position: relative;  
+         
     }
     .delete{
       position: absolute;
       top: 0;
       right: 0;
       border-radius: 50%;
-      padding: 8px;
+      padding: 8px;      
     }
     .delete:hover{
       cursor: pointer;
       box-shadow: 1px 2px 3px rgba(0,0,0,0.2);
+      color: white;
+      background-color: var(--ivy-green)
     }
         /* create styles */
         .create-course form{
@@ -128,4 +135,8 @@
           border: 0;
           font-size: 1.2em;
           cursor: pointer;
+        }
+        .create-course button:hover {
+          background-color: var(--ivy-lightGreen);
+          color: white;
         }
