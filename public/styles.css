@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap');
 :root {
   --ivy-green: #006648;
+  --ivy-lightGreen: #0B874B;
   --ivy-lightGrey: #F5F5F5;
   --ivy-darkGrey: #D8D8D8;
 }
@@ -75,14 +76,38 @@
           background: var(--ivy-lightGrey);
         }
         /* index styles */
-        /* details styles */
+    .courses a{
+      display: block;
+      margin: 40px 0;
+      padding-left: 30px;
+      border-left: 6px solid var(--ivy-lightGreen);
+    }
+    .courses a:hover h3{
+      color: var(--ivy-lightGreen);
+    }
+
+    /* details styles */
+    .details{
+      position: relative;
+    }
+    .delete{
+      position: absolute;
+      top: 0;
+      right: 0;
+      border-radius: 50%;
+      padding: 8px;
+    }
+    .delete:hover{
+      cursor: pointer;
+      box-shadow: 1px 2px 3px rgba(0,0,0,0.2);
+    }
         /* create styles */
-        .create-blog form{
+        .create-course form{
           max-width: 400px;
           margin: 0 auto;
-        }
+        }course
         .create-course input,
-        .create-blog textarea{
+        .create-course textarea{
           display: block;
           width: 100%;
           margin: 10px 0;
