@@ -13,7 +13,7 @@
       <p>Description: <%= course.description %></p>
     </div>
 
-    <form action = "/courses/<%= course._id %>" method = "POST" id = "editForm">
+    <form action = "/courses/<%= course._id %>" method = "POST" id = "editForm" class = "editForm" display = "none">
         <p><label for="courseName">Course: </label>
         <input type="text" id="courseName" name="courseName" value = <%= course.courseName %> required></p>
         <p><label for="subjectArea">Subject: </label>

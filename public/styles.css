@@ -25,6 +25,7 @@
           left: 0;
           position: fixed;
           top: 0;
+          z-index:1;
           display: flex;
           justify-content: space-between;
           margin-bottom: 60px;
@@ -77,6 +78,11 @@
           margin-left: 20px;
           padding: 10px 10px 10px 10px;
           background: var(--ivy-lightGrey);
+        }
+        .editForm{
+          margin-top: 175px;
+          margin-left: 20px;
+          padding: 10px 10px 10px 10px
         }
         /* index styles */
     .courses a{
