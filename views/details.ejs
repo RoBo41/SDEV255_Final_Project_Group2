@@ -6,22 +6,33 @@
 
   <div class="details content">
     <h2><%= course.title %></h2>
-    <div class="content">
-      <p><%= course.courseName %></p>
-      <p><%= course.subjectArea %></p>
+    <div class="content" id = "content">
+      <p>Course: <%= course.courseName %></p>
+      <p>Subject: <%= course.subjectArea %></p>
       <p>Credits: <%= course.creditHours %></p>
-      <p><%= course.description %></p>
-
+      <p>Description: <%= course.description %></p>
     </div>
+
+    <form action = "/courses/<%= course._id %>" method = "POST" id = "editForm">
+        <p><label for="courseName">Course: </label>
+        <input type="text" id="courseName" name="courseName" value = <%= course.courseName %> required></p>
+        <p><label for="subjectArea">Subject: </label>
+        <input type="text" id="subjectArea" name="subjectArea" value = <%= course.subjectArea %> required></p>
+        <p><label for="creditHours">Credits: </label>
+        <input type="text" id="creditHours" name="creditHours" value = <%= course.creditHours %> required></p>
+        <p><label for="description">Description: </label>
+        <textarea id="description" name="description" required><%= course.description %></textarea></p>
+        <button>Submit</button>
+    </form>
+    <button id = "editButton">Edit</button>
     <a class="delete" data-doc="<%= course._id %>">delete course</a>
   </div>
-
   <%- include("./partials/footer.ejs") %>
 
-  <script>
-    const trashcan = document.querySelector('a.delete');
-    trashcan.addEventListener('click', (e) => {
-      const endpoint = `/courses/${trashcan.dataset.doc}`;
+<script>
+    const deleter = document.querySelector('a.delete');
+    deleter.addEventListener('click', (e) => {
+      const endpoint = `/courses/${deleter.dataset.doc}`;
       fetch(endpoint, {
         method: 'DELETE',
       })
@@ -29,7 +40,28 @@
       .then(data => window.location.href = data.redirect)
       .catch(err => console.log(err));
     });
-    
-  </script>
+</script>
+
+  <script>
+    const contentDiv = document.getElementById("content");
+    const EditFormToggle = document.getElementById("editButton");
+    const editForm = document.getElementById("editForm");
+    editForm.style.display = "none";
+
+    var toggleBool = false; //if false display details content, if true display edit content.
+    EditFormToggle.addEventListener("click", function() {
+      toggleBool = !toggleBool;
+      if (toggleBool){
+        console.log(contentDiv);
+        editForm.style.display = "block";
+        contentDiv.style.display = "none";
+        EditFormToggle.innerText = "Cancel"
+      }else{
+        editForm.style.display = "none";
+        contentDiv.style.display = "block";   
+        EditFormToggle.innerText = "Edit"
+      }
+    });
+    </script>
 </body>
 </html>

@@ -43,6 +43,7 @@ app.get('/courses', (req, res)=>{
 })
 
 app.post('/courses', (req,res)=>{
+  console.log(req.body)
   const course = new Course(req.body)
   course.save()
     .then((result)=>{
@@ -78,6 +79,19 @@ app.delete('/courses/:id', (req, res) => {
     .catch(err => {
       console.log(err);
     });
+});
+
+app.post('/courses/:id', (req, res) => {
+  const id = req.params.id;
+  //const { courseName, subjectArea, creditHours, description } = 
+  console.log(req.body);
+  Course.findByIdAndUpdate(id, req.body, { new: true })
+  .then(updatedCourse => {
+    res.redirect('/courses/' + updatedCourse.id);
+  })
+  .catch(err => {
+    console.log(err);
+  });
 });
 
 // 404 page
