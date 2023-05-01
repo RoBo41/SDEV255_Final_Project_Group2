@@ -62,6 +62,12 @@
         EditFormToggle.innerText = "Edit"
       }
     });
+   const deleter2 = deleter;
+   deleter2.style.display = "none";
+   const EditFormToggle2 = document.getElementById("editButton");
+   EditFormToggle2.addEventListener("click", function() {
+    deleter2.style.display = "block";
+});
     </script>
 </body>
 </html>
