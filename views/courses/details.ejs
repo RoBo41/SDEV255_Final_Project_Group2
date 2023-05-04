@@ -47,6 +47,7 @@
     const EditFormToggle = document.getElementById("editButton");
     const editForm = document.getElementById("editForm");
     editForm.style.display = "none";
+    deleter.style.display = "none";
 
     var toggleBool = false; //if false display details content, if true display edit content.
     EditFormToggle.addEventListener("click", function() {
@@ -55,19 +56,15 @@
         console.log(contentDiv);
         editForm.style.display = "block";
         contentDiv.style.display = "none";
-        EditFormToggle.innerText = "Cancel"
+        EditFormToggle.innerText = "Cancel";
+        deleter.style.display = "block";
       }else{
         editForm.style.display = "none";
         contentDiv.style.display = "block";   
-        EditFormToggle.innerText = "Edit"
+        EditFormToggle.innerText = "Edit";
+        deleter.style.display = "none";
       }
     });
-   const deleter2 = deleter;
-   deleter2.style.display = "none";
-   const EditFormToggle2 = document.getElementById("editButton");
-   EditFormToggle2.addEventListener("click", function() {
-    deleter2.style.display = "block";
-});
     </script>
 </body>
 </html>
