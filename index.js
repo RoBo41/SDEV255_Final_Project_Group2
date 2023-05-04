@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const Course = require('./models/course');
+const courseRoutes = require('./routes/courseRoutes')
 //express app
 const app = express();
 
@@ -27,72 +27,7 @@ app.get('/about', (req, res) => {
 });
 
 // course routes
-
-// app.get('/add-course', (req, res) => {
-//     res.render('add-course', { title: 'Create a new course'});
-// } );
-
-app.get('/courses', (req, res)=>{
-  Course.find().sort({ createdAt: -1})
-  .then((result)=>{
-    res.render('index', { title: 'Courses', courses: result});
-  })
-  .catch((err)=>{
-    console.log(err);
-  })
-})
-
-app.post('/courses', (req,res)=>{
-  console.log(req.body)
-  const course = new Course(req.body)
-  course.save()
-    .then((result)=>{
-      res.redirect('/courses')
-    })
-    .catch((err)=>{
-      console.log(err)
-    })  
-  });
-
-app.get('/courses/create', (req, res) => {
-  res.render('create', { title: 'Create a new course'});
-} );
-
-app.get('/courses/:id', (req, res) => {
-  const id = req.params.id;
-    Course.findById(id)
-    .then(result => {
-      res.render('details', { course: result, title: 'Course Details' });
-    })
-    .catch(err => {
-      console.log(err);
-    });
-});
-
-app.delete('/courses/:id', (req, res) => {
-  const id = req.params.id;
-    
-  Course.findByIdAndDelete(id)
-    .then(result => {
-      res.json({ redirect: '/courses' });
-    })
-    .catch(err => {
-      console.log(err);
-    });
-});
-
-app.post('/courses/:id', (req, res) => {
-  const id = req.params.id;
-  //const { courseName, subjectArea, creditHours, description } = 
-  console.log(req.body);
-  Course.findByIdAndUpdate(id, req.body, { new: true })
-  .then(updatedCourse => {
-    res.redirect('/courses/' + updatedCourse.id);
-  })
-  .catch(err => {
-    console.log(err);
-  });
-});
+app.use('/courses', courseRoutes)
 
 // 404 page
 app.use((req, res) => {
