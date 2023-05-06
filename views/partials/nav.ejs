@@ -1,7 +1,22 @@
 <nav class = "header-nav">
     <div class = "site-title">
         <a href = "/"><h1>Course Champion</h1></a>
-        <p>SDEV255 Group 2 | Final Project</p>    
+        <p>SDEV255 Group 2 | Final Project</p>
+        <% if (user) { %>
+        <p>Welcome, <%= user.email %></p>
+        <% } %>    
+    </div>
+    <div class = "authLinks">
+    <ul>
+        <% if (user) { %>
+        <li><a href="/auths/logout">Log out</a></li>
+        <% } else { %>
+        <li><a href="/auths/login">Log in</a></li>
+        <li><a href="/auths/signup">Sign up</a></li>
+        <% } %>
+      
+    <li></li>
+    </ul>
     </div>
     <ul>
         <li><a href= "/">Courses</a></li>
