@@ -14,16 +14,13 @@ const userSchema = mongoose.Schema({
         type: String,
         required: [true,'Please enter a password'],
         minlength: [6,'Minimu password length is 6 characters']
+    },
+    role: {
+        type: String,
+        required: true
     }
 });
 
-// fire a function after doc saved to db
-// userSchema.post('save', function(doc, next){
-//     console.log('the user was created and saved', doc)
-//     next();
-// })
-
-// fire a function before doc saved to db
 userSchema.pre('save', async function(next){
     const salt = await bcrypt.genSalt();
     this.password = await bcrypt.hash(this.password, salt);

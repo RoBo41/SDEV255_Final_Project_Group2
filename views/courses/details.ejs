@@ -24,8 +24,10 @@
         <textarea id="description" name="description" required><%= course.description %></textarea></p>
         <button>Submit</button>
     </form>
+    <% if (user){ if (user.role === "teacher") { %>
     <button id = "editButton">Edit</button>
     <a class="delete" data-doc="<%= course._id %>">delete course</a>
+    <% } } %>
   </div>
   <%- include("../partials/footer.ejs") %>
 

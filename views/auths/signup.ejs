@@ -11,6 +11,12 @@
         <label for="password">Password</label>
         <input type="password" name="password" required />
         <div class="password error"></div>
+        <label for="role">Role</label>
+        <select name="role">
+          <option value= "teacher">teacher</option>
+          <option value= "student">student</option>
+        </select>
+        <div class="role error"></div>
         <button>Sign up</button>
       </form>
 </div>
@@ -31,11 +37,12 @@
       // get values
       const email = form.email.value;
       const password = form.password.value;
+      const role = form.role.value
       
       try {
         const res = await fetch('/auths/signup', {
           method: 'POST',
-          body: JSON.stringify({email, password}),
+          body: JSON.stringify({email, password, role}),
           headers: {'Content-Type': 'application/json'}
         });
         const data = await res.json();
