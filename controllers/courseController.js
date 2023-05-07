@@ -54,7 +54,7 @@ const course_index = (req, res)=>{
     console.log(req.body);
     Course.findByIdAndUpdate(id, req.body, { new: true })
     .then(updatedCourse => {
-      res.redirect('/' + updatedCourse.id);
+      res.redirect('/courses/' + updatedCourse.id);
     })
     .catch(err => {
       console.log(err);
