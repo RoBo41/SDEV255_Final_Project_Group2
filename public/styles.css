@@ -83,6 +83,20 @@
           margin-left: 20px;
           padding: 10px 10px 10px 10px
         }
+
+        .topright {
+          position: absolute;
+          top: 8px;
+          right: 13px;
+          font-size: 18px;
+        }
+
+        .topcenterright {
+          position: absolute;
+          top: 32px;
+          right: 13px;
+          font-size: 18px;
+        }
         /* index styles */
     .courses a{
       display: block;
