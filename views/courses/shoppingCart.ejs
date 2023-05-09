@@ -5,7 +5,7 @@
     <%- include('../partials/nav.ejs') %>
 
     <div class="courses content">
-        <h2>All Courses</h2>
+        <h2>Shopping cart</h2>
         <% if (user.shoppingCart.length > 0){ let index = 0%>
             <% user.shoppingCart.forEach(course => { %>
                 <a class="single" href="/courses/<%= course._id %>">
