@@ -18,7 +18,9 @@ const userSchema = mongoose.Schema({
     role: {
         type: String,
         required: true
-    }
+    },
+    shoppingCart: [],
+    courses: []
 });
 
 userSchema.pre('save', async function(next){

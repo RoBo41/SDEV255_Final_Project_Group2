@@ -28,6 +28,9 @@
     <button id = "editButton">Edit</button>
     <a class="delete" data-doc="<%= course._id %>">delete course</a>
     <% } } %>
+    <% if (user.role === "student" && !user.shoppingCart.some(e => e._id.equals(course._id)) && !user.courses.some(e => e._id.equals(course._id))) { %>
+      <button class = "addToCart" data-doc = "<%= course._id %>">Add to shopping cart</button>
+      <% } %>
   </div>
   <%- include("../partials/footer.ejs") %>
 
@@ -44,6 +47,19 @@
     });
 </script>
 
+<script>
+  const cartAdder = document.querySelector('button.addToCart');
+  cartAdder.addEventListener('click', (e) => {
+    const endpoint = `/courses/shoppingCart/${cartAdder.dataset.doc}`;
+    fetch(endpoint, {
+      method: 'POST',
+    })
+    .then(response => response.json())
+    .then(data => window.location.href = data.redirect)
+    .catch(err => console.log(err));
+  });
+</script>
+
   <script>
     const contentDiv = document.getElementById("content");
     const EditFormToggle = document.getElementById("editButton");
@@ -55,7 +71,6 @@
     EditFormToggle.addEventListener("click", function() {
       toggleBool = !toggleBool;
       if (toggleBool){
-        console.log(contentDiv);
         editForm.style.display = "block";
         contentDiv.style.display = "none";
         EditFormToggle.innerText = "Cancel";

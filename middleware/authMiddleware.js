@@ -50,6 +50,34 @@ const requireTeacherAuth = async (req, res, next) => {
     }
   };
 
+  // Student Role Auth
+const requireStudentAuth = async (req, res, next) => {
+    const token = req.cookies.jwt;
+  
+    // Check if token exists
+    if (!token) {
+      return res.redirect('/auths/login');
+    }
+  
+    try {
+      // Verify the token and get the decoded payload
+      const decodedToken = jwt.verify(token, 'net ninja secret');
+  
+      // Find the user by their ID
+      const user = await User.findById(decodedToken.id);
+  
+      // Check if the user is a teacher
+      if (user.role === 'student') {
+        next();
+      } else {
+        res.redirect('/');
+      }
+    } catch (err) {
+      console.log(err.message);
+      res.redirect('/auths/login');
+    }
+  };
+
 // check current user
 const checkUser = (req, res, next) =>{
     const token = req.cookies.jwt;
@@ -69,4 +97,4 @@ const checkUser = (req, res, next) =>{
         next();
     }
 }
-module.exports = {requireAuth, requireTeacherAuth, checkUser};
+module.exports = {requireAuth, requireTeacherAuth, requireStudentAuth, checkUser};
