@@ -174,7 +174,7 @@ const course_index = (req, res)=>{
     console.log(query)
     const courses = []
     allCourses.forEach(course=>{
-      if(course.courseName === query || course.subjectArea === query || course.creditHours === query){
+      if(course.courseName.toUpperCase() === query.toUpperCase() || course.subjectArea.toUpperCase() === query.toUpperCase() || course.creditHours === query){
         courses.push(course);
       }
     })
