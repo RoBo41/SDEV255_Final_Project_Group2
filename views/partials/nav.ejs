@@ -33,16 +33,18 @@
     </ul>
     <% if(user) {%>
     <div class="search" >
-        <a id = "searchBtn" href="/courses/search">Search</a><input id = "searchInput" type = "text">
+        <a id = "searchBtn" href="#">Search</a><input id = "searchInput" type = "text">
     </div>
     <% } %>
 </nav>
 <script>
     const searchButton = document.getElementById("searchBtn");
     const searchInput = document.getElementById("searchInput");
-    searchInput.addEventListener('input', (e)=>{
-        if (searchInput.value != null){
+    searchInput.addEventListener('change', (e)=>{
+        if (searchInput.value.trim() != ""){
             searchButton.href = '/courses/search/' + searchInput.value;
+        } else{
+          searchButton.href = "#"
         }
     })
 

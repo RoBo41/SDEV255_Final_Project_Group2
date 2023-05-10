@@ -1,13 +1,13 @@
 const express = require('express')
 const router = express.Router();
 const courseController = require('../controllers/courseController');
-const {requireAuth, requireTeacherAuth, requireStudentAuth} = require('../middleware/authMiddleware');
-const {search_get, checkShoppingCartForCourse, checkStudentCoursesForCourse, checkTeacherCoursesForCourse} = require('../middleware/courseMiddleware');
+const { requireAuth, requireTeacherAuth, requireStudentAuth } = require('../middleware/authMiddleware');
+const { search_get, checkShoppingCartForCourse, checkStudentCoursesForCourse, checkTeacherCoursesForCourse } = require('../middleware/courseMiddleware');
 
 router.get('/', requireAuth, courseController.course_index)
-  
+
 router.post('/', requireTeacherAuth, courseController.course_create_post);
-  
+
 router.get('/create', requireTeacherAuth, courseController.course_create_get);
 
 router.get('/myCourses', requireAuth, courseController.myCourses_get);
@@ -22,7 +22,6 @@ router.post('/myCourses/:id', requireAuth, checkStudentCoursesForCourse, courseC
 
 router.delete('/myCourses/:id', requireStudentAuth, courseController.myCourses_delete);
 
-router.get('/search/', requireAuth, courseController.search_get);
 
 router.get('/search/:query', requireAuth, courseController.search_get);
 
