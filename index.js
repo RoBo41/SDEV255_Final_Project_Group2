@@ -7,7 +7,7 @@ const { checkUser } = require('./middleware/authMiddleware');
 //express app
 const app = express();
 
-const dbURI = 'mongodb+srv://Group2User:Group2Password@nodetut.cuis5bu.mongodb.net/?retryWrites=true&w=majority'
+const dbURI = 'mongodb+srv://Group2User:Group2Password@nodetut.cuis5bu.mongodb.net/SDEV255_Final_Project_Group2'
 mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
   .then((result)=> app.listen(3000))
   .catch((err)=> console.log(err));
