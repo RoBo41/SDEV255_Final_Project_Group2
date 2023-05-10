@@ -168,6 +168,19 @@ const course_index = (req, res)=>{
     }
   }
 
+  const search_get = async (req,res)=>{
+    const allCourses = await Course.find();
+    const query = req.params.query;
+    console.log(query)
+    const courses = []
+    allCourses.forEach(course=>{
+      if(course.courseName === query || course.subjectArea === query || course.creditHours === query){
+        courses.push(course);
+      }
+    })
+    console.log(courses)
+    res.render('courses/search', {title: 'Search results', courses})
+  }
   module.exports = {
     course_index,
     course_create_get,
@@ -180,5 +193,6 @@ const course_index = (req, res)=>{
     myCourses_post,
     myCourses_delete,
     shoppingCart_post,
-    shoppingCart_delete
+    shoppingCart_delete,
+    search_get
   }

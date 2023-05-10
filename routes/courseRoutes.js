@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router();
 const courseController = require('../controllers/courseController');
 const {requireAuth, requireTeacherAuth, requireStudentAuth} = require('../middleware/authMiddleware');
-const {checkShoppingCartForCourse, checkStudentCoursesForCourse, checkTeacherCoursesForCourse} = require('../middleware/courseMiddleware');
+const {search_get, checkShoppingCartForCourse, checkStudentCoursesForCourse, checkTeacherCoursesForCourse} = require('../middleware/courseMiddleware');
 
 router.get('/', requireAuth, courseController.course_index)
   
@@ -21,6 +21,10 @@ router.delete('/shoppingCart/:id', requireStudentAuth, courseController.shopping
 router.post('/myCourses/:id', requireAuth, checkStudentCoursesForCourse, courseController.myCourses_post);
 
 router.delete('/myCourses/:id', requireStudentAuth, courseController.myCourses_delete);
+
+router.get('/search/', requireAuth, courseController.search_get);
+
+router.get('/search/:query', requireAuth, courseController.search_get);
 
 //The following  must be at bottom of the script
 router.get('/:id', requireAuth, courseController.course_details);

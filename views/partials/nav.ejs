@@ -31,4 +31,19 @@
         <li><a href = "/courses/shoppingCart">Shopping Cart</a></li>
         <% } %>
     </ul>
+    <% if(user) {%>
+    <div class="search" >
+        <a id = "searchBtn" href="/courses/search">Search</a><input id = "searchInput" type = "text">
+    </div>
+    <% } %>
 </nav>
+<script>
+    const searchButton = document.getElementById("searchBtn");
+    const searchInput = document.getElementById("searchInput");
+    searchInput.addEventListener('input', (e)=>{
+        if (searchInput.value != null){
+            searchButton.href = '/courses/search/' + searchInput.value;
+        }
+    })
+
+</script>
