@@ -19,12 +19,16 @@
     </ul>
     </div>
     <ul>
+        <% if (user){ %>
         <li><a href= "/">Courses</a></li>
+        <%}if (!user){%>
         <li><a href="/about">About</a></li>
-        <% if (user){ if (user.role === "teacher") { %>
+        <%}if (user && user.role === "teacher") { %>
         <li><a href="/courses/create">New Course</a></li>
-        <% } } %>
+        <%}if(user){ %>
         <li><a href = "/courses/myCourses">My Courses</a></li>
+        <%}if (user && user.role === "student") {%>
         <li><a href = "/courses/shoppingCart">Shopping Cart</a></li>
+        <% } %>
     </ul>
 </nav>

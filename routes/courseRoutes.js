@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router();
 const courseController = require('../controllers/courseController');
 const {requireAuth, requireTeacherAuth, requireStudentAuth} = require('../middleware/authMiddleware');
-const {checkShoppingCartForCourse, checkCoursesForCourse} = require('../middleware/courseMiddleware');
+const {checkShoppingCartForCourse, checkStudentCoursesForCourse, checkTeacherCoursesForCourse} = require('../middleware/courseMiddleware');
 
 router.get('/', requireAuth, courseController.course_index)
   
@@ -14,20 +14,20 @@ router.get('/myCourses', requireAuth, courseController.myCourses_get);
 
 router.get('/shoppingCart', requireStudentAuth, courseController.shoppingCart_get);
 
-router.post('/shoppingCart/:id', requireStudentAuth, checkShoppingCartForCourse, checkCoursesForCourse, courseController.shoppingCart_post);
+router.post('/shoppingCart/:id', requireStudentAuth, checkShoppingCartForCourse, checkStudentCoursesForCourse, courseController.shoppingCart_post);
 
 router.delete('/shoppingCart/:id', requireStudentAuth, courseController.shoppingCart_delete);
 
-router.post('/myCourses/:id', requireAuth, checkCoursesForCourse, courseController.myCourses_post);
+router.post('/myCourses/:id', requireAuth, checkStudentCoursesForCourse, courseController.myCourses_post);
 
-router.delete('/myCourses/:id', courseController.myCourses_delete);
+router.delete('/myCourses/:id', requireStudentAuth, courseController.myCourses_delete);
 
 //The following  must be at bottom of the script
 router.get('/:id', requireAuth, courseController.course_details);
 
-router.delete('/:id', requireTeacherAuth, courseController.course_delete);
+router.delete('/:id', requireTeacherAuth, checkTeacherCoursesForCourse, courseController.course_delete);
 
-router.post('/:id', requireTeacherAuth, courseController.course_edit);
+router.post('/:id', requireTeacherAuth, checkTeacherCoursesForCourse, courseController.course_edit);
 
 
 

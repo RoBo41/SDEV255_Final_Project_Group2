@@ -12,7 +12,7 @@
       <p>Credits: <%= course.creditHours %></p>
       <p>Description: <%= course.description %></p>
     </div>
-
+    <% if (verified){ %>
     <form action = "/courses/<%= course._id %>" method = "POST" id = "editForm" class = "editForm" display = "none">
         <p><label for="courseName">Course: </label>
         <input type="text" id="courseName" name="courseName" value = <%= course.courseName %> required></p>
@@ -24,16 +24,29 @@
         <textarea id="description" name="description" required><%= course.description %></textarea></p>
         <button>Submit</button>
     </form>
-    <% if (user){ if (user.role === "teacher") { %>
     <button id = "editButton">Edit</button>
     <a class="delete" data-doc="<%= course._id %>">delete course</a>
-    <% } } %>
+    <% } %>
     <% if (user.role === "student" && !user.shoppingCart.some(e => e._id.equals(course._id)) && !user.courses.some(e => e._id.equals(course._id))) { %>
       <button class = "addToCart" data-doc = "<%= course._id %>">Add to shopping cart</button>
       <% } %>
   </div>
   <%- include("../partials/footer.ejs") %>
-
+  <%if (user.role === "student" && !user.shoppingCart.some(e => e._id.equals(course._id)) && !user.courses.some(e => e._id.equals(course._id))){%>
+<script>
+  const cartAdder = document.querySelector('button.addToCart');
+  cartAdder.addEventListener('click', (e) => {
+    const endpoint = `/courses/shoppingCart/${cartAdder.dataset.doc}`;
+    fetch(endpoint, {
+      method: 'POST',
+    })
+    .then(response => response.json())
+    .then(data => window.location.href = data.redirect)
+    .catch(err => console.log(err));
+  });
+</script>
+<% } %>
+<% if (verified){ %>
 <script>
     const deleter = document.querySelector('a.delete');
     deleter.addEventListener('click', (e) => {
@@ -47,18 +60,7 @@
     });
 </script>
 
-<script>
-  const cartAdder = document.querySelector('button.addToCart');
-  cartAdder.addEventListener('click', (e) => {
-    const endpoint = `/courses/shoppingCart/${cartAdder.dataset.doc}`;
-    fetch(endpoint, {
-      method: 'POST',
-    })
-    .then(response => response.json())
-    .then(data => window.location.href = data.redirect)
-    .catch(err => console.log(err));
-  });
-</script>
+
 
   <script>
     const contentDiv = document.getElementById("content");
@@ -83,5 +85,6 @@
       }
     });
     </script>
+<%} %>
 </body>
 </html>

@@ -3,14 +3,6 @@ const Course = require('../models/course');
 const User = require('../models/user');
 const jwt = require('jsonwebtoken')
 
-// function findIndex(arr, e){
-//   for (let i = 0; i < arr.length; i++){
-//     if(arr[i].equals(e)){
-//       return i;
-//     }
-//   }
-// }
-
 const course_index = (req, res)=>{
     Course.find().sort({ createdAt: -1})
     .then((result)=>{
@@ -21,9 +13,12 @@ const course_index = (req, res)=>{
     })
   }
   
-   const course_create_post = (req,res)=>{
-    const course = new Course(req.body)
-    course.save()
+   const course_create_post = async (req,res)=>{
+    const course = new Course(req.body);
+    const user = await User.findById(jwt.verify(req.cookies.jwt, 'net ninja secret').id);
+    course.save();
+    user.courses.push(course._id);
+    user.save()
       .then((result)=>{
         res.redirect('/')
       })
@@ -36,11 +31,13 @@ const course_index = (req, res)=>{
     res.render('courses/create', { title: 'Create a new course'});
   }
   
-  const course_details = (req, res) => {
+  const course_details = async (req, res) => {
     const id = req.params.id;
-      Course.findById(id)
+    const user = await User.findById(jwt.verify(req.cookies.jwt, 'net ninja secret').id);
+    Course.findById(id)
       .then(result => {
-        res.render('courses/details', { course: result, title: 'Course Details' });
+        const auth = user.courses.some(e => e._id.equals(result._id)) && user.role === "teacher";
+        res.render('courses/details', { course: result, title: 'Course Details', verified: auth });
       })
       .catch(err => {
         console.log(err);
@@ -49,9 +46,15 @@ const course_index = (req, res)=>{
   
   const course_delete = (req, res) => {
     const id = req.params.id;
-      
     Course.findByIdAndDelete(id)
-      .then(result => {
+      .then(async result => {
+        const users = await User.find();
+        users.forEach((user)=>{
+          user.shoppingCart.pull(result._id)
+          user.courses.pull(result._id)
+          user.save()
+        })
+
         res.json({ redirect: '/' });
       })
       .catch(err => {
@@ -71,13 +74,26 @@ const course_index = (req, res)=>{
     });
   }
 
-  const myCourses_get = (req, res)=>{
-      res.render('courses/myCourses', { title: 'My Courses'});
+  const myCourses_get = async (req, res)=>{
+    const user = await User.findById(jwt.verify(req.cookies.jwt, 'net ninja secret').id);
+    let userCourses = [];
+    for (let i = 0; i< user.courses.length; i++){
+      userCourses.push(await Course.findById(user.courses[i]))
+    }
+    res.render('courses/myCourses', { title: 'My Courses', courses: userCourses});
   }
 
-  const shoppingCart_get = (req, res)=>{
-    res.render('courses/shoppingCart', { title: 'Shopping Cart'});
+  const shoppingCart_get = async (req, res)=>{
+    const user = await User.findById(jwt.verify(req.cookies.jwt, 'net ninja secret').id);
+    let userCourses = [];
+    for (let i = 0; i< user.shoppingCart.length; i++){
+      userCourses.push(await Course.findById(user.shoppingCart[i]))
+    }
+    console.log(userCourses)
+    res.render('courses/shoppingCart', { title: 'Shopping Cart', courses: userCourses});
   }
+    
+  
 
   const shoppingCart_post = async (req, res) => {
     try {
@@ -86,7 +102,7 @@ const course_index = (req, res)=>{
       const decodedToken = jwt.verify(token, 'net ninja secret');
       const course = await Course.findById(id);
       const user = await User.findById(decodedToken.id);
-      user.shoppingCart.push(course);
+      user.shoppingCart.push(course._id);
       user.save()
       .then((result)=>{
         res.json({redirect:'/courses/shoppingCart'})
@@ -104,11 +120,10 @@ const course_index = (req, res)=>{
       const decodedToken = jwt.verify(token, 'net ninja secret');
       const course = await Course.findById(id);
       const user = await User.findById(decodedToken.id);
-      console.log(course.courseName);
-      //let index = console.log(user.shoppingCart.indexOf(course._id));
-      user.shoppingCart.pull(course);
+      user.shoppingCart.pull(course._id);
       user.save()
       .then((result)=>{
+        console.log(result)
         res.json({redirect:'/courses/shoppingCart'})
       })
     } catch (err) {
@@ -124,8 +139,8 @@ const course_index = (req, res)=>{
       const decodedToken = jwt.verify(token, 'net ninja secret');
       const course = await Course.findById(id);
       const user = await User.findById(decodedToken.id);
-      user.courses.push(course);
-      user.shoppingCart.pull(course);
+      user.courses.push(course._id);
+      user.shoppingCart.pull(course._id);
       user.save()
       .then((result)=>{
         res.redirect('/courses/myCourses')
@@ -142,9 +157,7 @@ const course_index = (req, res)=>{
       const decodedToken = jwt.verify(token, 'net ninja secret');
       const course = await Course.findById(id);
       const user = await User.findById(decodedToken.id);
-      console.log(course.courseName);
-      //let index = console.log(user.shoppingCart.indexOf(course._id));
-      user.courses.pull(course);
+      user.courses.pull(course._id);
       user.save()
       .then((result)=>{
         res.json({redirect:'/courses/myCourses'})
