@@ -1,4 +1,4 @@
-<html lang="en">
+
 <%- include('../partials/head'); -%>
 <body>
 <%- include("../partials/nav.ejs") %>
@@ -38,7 +38,9 @@
       passwordError.textContent = "";
       
       // get values
+      console.log("here1")
       const email = form.email.value;
+      console.log('here2')
       const password = form.password.value;
       
       try {

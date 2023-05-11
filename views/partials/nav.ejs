@@ -9,7 +9,7 @@
     <div class = "authLinks">
     <ul>
         <% if (user) { %>
-        <li><a href="/auths/logout" class="topright">Log out</a></li>
+        <li><a href="/auths/logout" class="bottomleft">Log out</a></li>
         <% } else { %>
         <li><a href="/auths/login" class="topcenterright">Log in</a></li>
         <li><a href="/auths/signup" class="topright">Sign up</a></li>
@@ -37,6 +37,7 @@
     </div>
     <% } %>
 </nav>
+      <% if(user){%>
 <script>
     const searchButton = document.getElementById("searchBtn");
     const searchInput = document.getElementById("searchInput");
@@ -49,3 +50,4 @@
     })
 
 </script>
+<% } %>

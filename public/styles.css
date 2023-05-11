@@ -91,6 +91,13 @@
           font-size: 18px;
         }
 
+        .bottomleft {
+          position: absolute;
+          bottom: 31px;
+          left: 300px;
+          font-size: 17px;
+        }
+
         .topcenterright {
           position: absolute;
           top: 32px;
@@ -255,4 +262,9 @@ form .button input:hover{
 }
 form .signup-link a:hover{
   text-decoration: underline;
+}
+.center {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 40px;
 }
