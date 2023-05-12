@@ -13,6 +13,18 @@
           max-width: 1200px;
           background-color: #FFF;
         }
+        button {
+          margin: 10px;
+          border-radius: 36px;
+          background: #006648;
+          color: #f5f5f5;
+          text-transform: uppercase;
+          font-weight: 700;
+          font-size: 1em;
+          display: block; 
+          padding: 8px 12px;
+          letter-spacing: 2px;
+        }
         p, h1, h2, h3, a, ul{
           margin: 0;
           padding: 0;
@@ -46,6 +58,7 @@
         nav li{
           list-style-type: none;
           margin-left: 20px;
+          display: block;
         }
         nav li a:hover {
           color: black;
@@ -84,24 +97,66 @@
           padding: 10px 10px 10px 10px
         }
 
-        .topright {
+        .signup {
           position: absolute;
           top: 8px;
           right: 13px;
           font-size: 18px;
         }
 
-        .bottomleft {
+        .logout {
           position: absolute;
-          bottom: 31px;
-          left: 300px;
-          font-size: 17px;
+          top: 5px;
+          right: 5px;
+          font-size: 18px;
         }
 
-        .topcenterright {
+        .login {
           position: absolute;
           top: 32px;
           right: 13px;
+          font-size: 18px;
+        }
+
+        .search_bar {
+          position: absolute;
+          bottom: 10px;
+          right: 5px;
+          font-size: 17px;
+        }
+
+        .search_bar_word {
+          position: absolute;
+          bottom: 10px;
+          right: 232px;
+          font-size: 18px
+        }
+
+        .course_word {
+          position: absolute;
+          top: 50px;
+          right: 160px;
+          font-size: 18px;
+        }
+
+        .shopping_cart_word {
+          position: absolute;
+          top: 50px;
+          right: 5px;
+          font-size: 18px;
+        }
+
+        .new_course_word {
+          position: absolute;
+          top: 50px;
+          right: 5px;
+          font-size: 18px;
+        }
+
+        .my_course_word {
+          position: absolute;
+          top: 50px;
+          right: 250px;
           font-size: 18px;
         }
         /* index styles */
@@ -268,3 +323,14 @@ form .signup-link a:hover{
   justify-content: center;
   padding-bottom: 40px;
 }
+.no-courses {
+  border: 1px solid #000;
+  padding: 20px;
+  text-align: center;
+  font-size: 20px;
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 25px;
+}
+/* Mobile Styles

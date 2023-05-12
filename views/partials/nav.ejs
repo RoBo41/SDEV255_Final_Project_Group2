@@ -9,10 +9,10 @@
     <div class = "authLinks">
     <ul>
         <% if (user) { %>
-        <li><a href="/auths/logout" class="bottomleft">Log out</a></li>
+        <li><a href="/auths/logout" class="logout">Log out</a></li>
         <% } else { %>
-        <li><a href="/auths/login" class="topcenterright">Log in</a></li>
-        <li><a href="/auths/signup" class="topright">Sign up</a></li>
+        <li><a href="/auths/login" class="login">Log in</a></li>
+        <li><a href="/auths/signup" class="signup">Sign up</a></li>
         <% } %>
       
     <li></li>
@@ -20,20 +20,20 @@
     </div>
     <ul>
         <% if (user){ %>
-        <li><a href= "/">Courses</a></li>
+        <li><a href= "/" class="course_word">Courses</a></li>
         <%}if (!user){%>
         <li><a href="/about">About</a></li>
         <%}if (user && user.role === "teacher") { %>
-        <li><a href="/courses/create">New Course</a></li>
+        <li><a href="/courses/create" class="new_course_word">New Course</a></li>
         <%}if(user){ %>
-        <li><a href = "/courses/myCourses">My Courses</a></li>
+        <li><a href = "/courses/myCourses" class="my_course_word">My Courses</a></li>
         <%}if (user && user.role === "student") {%>
-        <li><a href = "/courses/shoppingCart">Shopping Cart</a></li>
+        <li><a href = "/courses/shoppingCart" class="shopping_cart_word">Shopping Cart</a></li>
         <% } %>
     </ul>
     <% if(user) {%>
     <div class="search" >
-        <a id = "searchBtn" href="#">Search</a><input id = "searchInput" type = "text">
+        <a id = "searchBtn" href="#" class="search_bar_word">Search</a><input id = "searchInput" class="search_bar" type = "text">
     </div>
     <% } %>
 </nav>

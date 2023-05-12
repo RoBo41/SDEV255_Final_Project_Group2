@@ -18,7 +18,11 @@
                 <% } %>
             <% }) %> 
         <% } else { %>
-            <p>There are no courses to display...</p>
+            <div class="no-courses">
+              <p>You have not registered for any courses yet.</p><br>
+              <p>Please find our courses page and look through the course we have to offer to determine                 the best one/ones for you</p>
+            </div>
+
         <% } %>
     </div>
           <%- include('../partials/footer.ejs')%>
