@@ -25,6 +25,9 @@
           padding: 8px 12px;
           letter-spacing: 2px;
         }
+        button:hover {
+          background: var(--ivy-lightGreen);
+        }
         p, h1, h2, h3, a, ul{
           margin: 0;
           padding: 0;
@@ -106,7 +109,7 @@
 
         .logout {
           position: absolute;
-          top: 5px;
+          top: 10px;
           right: 5px;
           font-size: 18px;
         }
@@ -128,14 +131,14 @@
         .search_bar_word {
           position: absolute;
           bottom: 10px;
-          right: 232px;
+          right: 230px;
           font-size: 18px
         }
 
         .course_word {
           position: absolute;
           top: 50px;
-          right: 160px;
+          right: 152px;
           font-size: 18px;
         }
 
@@ -149,14 +152,14 @@
         .new_course_word {
           position: absolute;
           top: 50px;
-          right: 5px;
+          right: 15px;
           font-size: 18px;
         }
 
         .my_course_word {
           position: absolute;
           top: 50px;
-          right: 250px;
+          right: 240px;
           font-size: 18px;
         }
         /* index styles */
